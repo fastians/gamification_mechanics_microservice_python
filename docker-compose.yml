@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  api_gateway:
+    build:
+      context: ./api_gateway
+    ports:
+      - "8000:8000"   # Expose port 8000
+    depends_on:
+      - auth_service
+      - quest_catalog_service
+      - quest_processing_service
+
+  auth_service:
+    build:
+      context: ./auth_service
+    ports:
+      - "8001:8001"
+
+  quest_catalog_service:
+    build:
+      context: ./quest_catalog_service
+    ports:
+      - "8002:8002"
+
+  quest_processing_service:
+    build:
+      context: ./quest_processing_service
+    ports:
+      - "8003:8003"

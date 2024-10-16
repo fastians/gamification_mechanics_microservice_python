@@ -1,0 +1,51 @@
+{
+  "user_quest_rewards": {
+    "columns": {
+      "user_id": "INT",
+      "quest_id": "INT",
+      "status": "ENUM",
+      "date": "timestamp",
+    },
+    "foreign_keys": {
+      "user_id": {
+        "references": "Users(user_id)"
+      },
+      "quest_id": {
+        "references": "Quests(quest_id)"
+      }
+    }
+  },
+  "Quest": {
+    "columns": {
+      "quest_id": "INT",
+      "reward_id": "INT",
+      "auto_claim": "boolean",
+      "streak": "INT",
+      "duplication": "INT",
+      "name": "STR",
+      "description": "STR",
+    },
+     "foreign_keys": {
+      "reward_id": {
+        "references": "Rewards(reward_id)"
+      },
+    }
+  },
+  "Rewards": {
+    "columns": {
+      "reward_id": "INT ",
+      "reward_name": "STR",
+      "reward_item": "STR",
+      "reward_qty": "INT"
+    }
+  },
+   "Users": {
+    "columns": {
+      "user_id": "INT ",
+      "user_name": "STR",
+      "gold": "INT",
+      "diamond": "INT",
+      "status": "INT"
+    }
+  }
+}
