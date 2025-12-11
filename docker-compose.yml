@@ -1,29 +1,47 @@
-version: '3.8'
 services:
   api_gateway:
+    container_name: api_gateway
     build:
       context: ./api_gateway
     ports:
-      - "8000:8000"   # Expose port 8000
+      - "8000:8000"
     depends_on:
       - auth_service
       - quest_catalog_service
       - quest_processing_service
+    restart: unless-stopped
 
   auth_service:
+    container_name: auth_service
     build:
       context: ./auth_service
     ports:
       - "8001:8001"
+    volumes:
+      - auth_data:/app
+    restart: unless-stopped
 
   quest_catalog_service:
+    container_name: quest_catalog_service
     build:
       context: ./quest_catalog_service
     ports:
       - "8002:8002"
+    volumes:
+      - quest_catalog_data:/app
+    restart: unless-stopped
 
   quest_processing_service:
+    container_name: quest_processing_service
     build:
       context: ./quest_processing_service
     ports:
       - "8003:8003"
+    volumes:
+      - quest_processing_data:/app
+    restart: unless-stopped
+
+volumes:
+  auth_data:
+  quest_catalog_data:
+  quest_processing_data:
