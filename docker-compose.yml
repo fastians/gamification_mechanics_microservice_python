@@ -1,4 +1,14 @@
 services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./reactjs_frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      - api_gateway
+    restart: unless-stopped
+
   api_gateway:
     container_name: api_gateway
     build:
